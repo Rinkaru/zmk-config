@@ -5,6 +5,8 @@
  */
 
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/rgb.h>
 
@@ -35,23 +37,23 @@
             display-name = "Function";
             sensor-bindings = <&inc_dec_kp C_NEXT C_PREV>;
             bindings = <
-          &bootloader  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans           &trans           &bootloader
-&kp C_PP  &trans       &trans  &tog 2  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans           &trans           &trans           &kp C_PP
-&trans    &trans       &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans           &trans                            &trans
-&trans    &trans       &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                             &trans
-&trans    &trans       &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &rgb_ug RGB_TOG                   &rgb_ug RGB_BRI  &rgb_ug RGB_EFF
-&trans    &trans       &trans  &trans  &trans  &trans                                  &trans  &trans  &trans  &trans           &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_HUI
+                   &bootloader  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans           &trans           &bootloader
+&kp C_PP           &trans       &trans        &tog 2        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans           &trans           &trans           &kp C_PP
+&trans             &trans       &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans           &trans                            &trans
+&trans             &trans       &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                                             &trans
+&ext_power EP_TOG  &trans       &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &rgb_ug RGB_TOG                   &rgb_ug RGB_BRI  &rgb_ug RGB_EFF
+&trans             &trans       &trans        &trans        &trans        &trans                                  &trans  &trans  &trans  &trans           &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_HUI
             >;
         };
 
         Colemak-DH {
             bindings = <
-        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans    &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans    &trans    &trans  &trans  &trans  &trans
-&trans  &trans  &kp Q   &kp W   &kp F   &kp P   &kp B   &kp J   &kp L   &kp U   &kp Y      &kp SEMI  &trans    &trans  &trans          &trans
-&trans  &trans  &kp A   &kp R   &kp S   &kp T   &kp G   &kp M   &kp N   &kp E   &kp I      &kp O     &kp APOS  &trans                  &trans
-&trans  &trans  &trans  &kp Z   &kp X   &kp C   &kp D   &kp V   &kp K   &kp H   &kp COMMA  &kp DOT   &trans    &trans          &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                                  &trans     &trans    &trans    &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &kp Q   &kp W   &kp F   &kp P   &kp B   &kp J   &kp L   &kp U   &kp Y   &kp SEMI  &trans  &trans  &trans          &trans
+&trans  &trans  &kp A   &kp R   &kp S   &kp T   &kp G   &kp M   &kp N   &kp E   &kp I   &kp O     &trans  &trans                  &trans
+&trans  &trans  &trans  &kp Z   &kp X   &kp C   &kp D   &kp V   &kp K   &kp H   &trans  &trans    &trans  &trans          &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                                  &trans  &trans    &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
