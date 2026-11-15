@@ -1,0 +1,38 @@
+/*
+ * Wake the left half (central) from &soft_off with the left Space key.
+ *
+ * The SNAP matrix uses a 1-of-8 column demux, so one key can only be read if its
+ * column is selected. Before powering off, the waker:
+ *   - drives the demux address lines to column 0 (pro_micro 18/19/20 all low),
+ *   - keeps the nice!nano 3.3 V rail on (P0.13), because the demux chip is powered
+ *     from it and soft-off would otherwise switch it off,
+ *   - arms row 5 (pro_micro 9) as a wake interrupt.
+ * Left Space is RC(5,0) in the SNAP matrix transform.
+ * Only active during soft-off; normal scanning is unaffected.
+ */
+
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+    soft_off_wake_keys {
+        compatible = "gpio-keys";
+        wake_key_space_left: wake_key_space_left {
+            gpios = <&pro_micro 9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        };
+    };
+
+    wakeup_space_left: wakeup_space_left {
+        compatible = "zmk,gpio-key-wakeup-trigger";
+        trigger = <&wake_key_space_left>;
+        wakeup-source;
+        extra-gpios = <&pro_micro 18 GPIO_ACTIVE_LOW>,  // demux A0 = 0
+                      <&pro_micro 19 GPIO_ACTIVE_LOW>,  // demux A1 = 0
+                      <&pro_micro 20 GPIO_ACTIVE_LOW>,  // demux A2 = 0  -> column 0
+                      <&gpio0 13 GPIO_ACTIVE_HIGH>;     // keep VCC (ext power) on
+    };
+
+    soft_off_wakers {
+        compatible = "zmk,soft-off-wakeup-sources";
+        wakeup-sources = <&wakeup_space_left>;
+    };
+};
